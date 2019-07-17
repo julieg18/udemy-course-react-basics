@@ -27,11 +27,30 @@ class App extends React.Component {
     this.setState({
       persons: [
         {
-          name: newName,
+          name: 'Max',
           age: 24,
         },
         {
-          name: 'Philis',
+          name: newName,
+          age: 16,
+        },
+        {
+          name: 'John',
+          age: 50,
+        },
+      ],
+    });
+  };
+
+  nameChangedHandler = (e) => {
+    this.setState({
+      persons: [
+        {
+          name: 'Max',
+          age: 24,
+        },
+        {
+          name: e.target.value,
           age: 16,
         },
         {
@@ -57,6 +76,7 @@ class App extends React.Component {
           name={this.state.persons[1].name}
           age={this.state.persons[1].age}
           click={this.switchNameHandler.bind(this, 'Max!')}
+          changed={this.nameChangedHandler}
         >
           My Hobbies: Crochet
         </Person>

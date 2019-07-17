@@ -62,10 +62,19 @@ class App extends React.Component {
   };
 
   render() {
+    // scoped to component or element you actually added to
+    const style = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer',
+    };
+
     return (
       <div className="App">
         <h1>I'm a React App</h1>
-        <button onClick={() => this.switchNameHandler('Matthew')}>
+        <button style={style} onClick={() => this.switchNameHandler('Matthew')}>
           Switch Name
         </button>
         <Person

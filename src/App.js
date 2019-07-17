@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import Person from './Person/Person';
 
-const App = (props) => {
-  const [personsState, setPersonsState] = useState({
+class App extends React.Component {
+  state = {
     persons: [
       {
         name: 'Max',
@@ -19,19 +19,15 @@ const App = (props) => {
       },
     ],
     otherState: 'state',
-  });
+  };
 
-  const [otherState, setOtherState] = useState('some other value');
-
-  console.log(personsState, otherState);
-
-  const switchNameHandler = () => {
+  switchNameHandler = (newName) => {
     // console.log('clicked!');
-    // DONT DO THIS: personsState.persons[0].name = 'Matthew'
-    setPersonsState({
+    // DONT DO THIS: this.state.persons[0].name = 'Matthew'
+    this.setState({
       persons: [
         {
-          name: 'Matthew',
+          name: newName,
           age: 24,
         },
         {
@@ -46,26 +42,31 @@ const App = (props) => {
     });
   };
 
-  return (
-    <div className="App">
-      <h1>I'm a React App</h1>
-      <button onClick={switchNameHandler}>Switch Name</button>
-      <Person
-        name={personsState.persons[0].name}
-        age={personsState.persons[0].age}
-      />
-      <Person
-        name={personsState.persons[1].name}
-        age={personsState.persons[1].age}
-      >
-        My Hobbies: Crochet
-      </Person>
-      <Person
-        name={personsState.persons[2].name}
-        age={personsState.persons[2].age}
-      />
-    </div>
-  );
-};
+  render() {
+    return (
+      <div className="App">
+        <h1>I'm a React App</h1>
+        <button onClick={() => this.switchNameHandler('Matthew')}>
+          Switch Name
+        </button>
+        <Person
+          name={this.state.persons[0].name}
+          age={this.state.persons[0].age}
+        />
+        <Person
+          name={this.state.persons[1].name}
+          age={this.state.persons[1].age}
+          click={this.switchNameHandler.bind(this, 'Max!')}
+        >
+          My Hobbies: Crochet
+        </Person>
+        <Person
+          name={this.state.persons[2].name}
+          age={this.state.persons[2].age}
+        />
+      </div>
+    );
+  }
+}
 
 export default App;

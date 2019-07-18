@@ -19,6 +19,7 @@ class App extends React.Component {
       },
     ],
     otherState: 'state',
+    showPersons: false,
   };
 
   switchNameHandler = (newName) => {
@@ -61,6 +62,13 @@ class App extends React.Component {
     });
   };
 
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({
+      showPersons: !doesShow,
+    });
+  };
+
   render() {
     // scoped to component or element you actually added to
     const style = {
@@ -74,25 +82,29 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>I'm a React App</h1>
-        <button style={style} onClick={() => this.switchNameHandler('Matthew')}>
-          Switch Name
+        <button style={style} onClick={this.togglePersonsHandler}>
+          Toggle List
         </button>
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-        />
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, 'Max!')}
-          changed={this.nameChangedHandler}
-        >
-          My Hobbies: Crochet
-        </Person>
-        <Person
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age}
-        />
+        {this.state.showPersons ? (
+          <div>
+            <Person
+              name={this.state.persons[0].name}
+              age={this.state.persons[0].age}
+            />
+            <Person
+              name={this.state.persons[1].name}
+              age={this.state.persons[1].age}
+              click={this.switchNameHandler.bind(this, 'Max!')}
+              changed={this.nameChangedHandler}
+            >
+              My Hobbies: Crochet
+            </Person>
+            <Person
+              name={this.state.persons[2].name}
+              age={this.state.persons[2].age}
+            />
+          </div>
+        ) : null}
       </div>
     );
   }

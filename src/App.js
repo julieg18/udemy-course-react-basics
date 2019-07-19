@@ -55,7 +55,6 @@ class App extends React.Component {
   };
 
   render() {
-    console.log(styles);
     let persons = null;
     let btnClass = null;
 
